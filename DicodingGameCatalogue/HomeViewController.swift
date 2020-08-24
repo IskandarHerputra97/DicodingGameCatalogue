@@ -29,6 +29,7 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Game Catalogue"
         view.backgroundColor = .white
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(favoriteBarButtonItemTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "About", style: .plain, target: self, action: #selector(aboutBarButtonItemTapped))
         
         //setupActivityIndicator()
@@ -89,6 +90,12 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: - ACTIONS
+    @objc func favoriteBarButtonItemTapped() {
+        print("favorite button tapped")
+        let favoriteGamesViewController = FavoriteGamesViewController()
+        navigationController?.pushViewController(favoriteGamesViewController, animated: true)
+    }
+    
     @objc func aboutBarButtonItemTapped() {
         print("about button tapped")
         let aboutViewController = AboutViewController()
