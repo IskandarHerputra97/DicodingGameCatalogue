@@ -16,6 +16,7 @@ class GameDetailViewController: UIViewController {
     var gameReleaseDateLabel = UILabel()
     var gameRankTitleLabel = UILabel()
     var gameRankLabel = UILabel()
+    var addGameToFavoriteButton = UIButton()
     let stackView = UIStackView()
     let scrollView = UIScrollView()
     
@@ -28,6 +29,7 @@ class GameDetailViewController: UIViewController {
         setupGameImageView()
         setupGameReleaseDateTitleLabel()
         setupGameRankTitleLabel()
+        setupAddGameToFavoriteButton()
         setupScrollView()
         setupStackView()
     }
@@ -49,6 +51,13 @@ class GameDetailViewController: UIViewController {
         gameRankTitleLabel.font = UIFont.boldSystemFont(ofSize: 24)
     }
     
+    func setupAddGameToFavoriteButton() {
+        addGameToFavoriteButton.setTitleColor(.white, for: .normal)
+        addGameToFavoriteButton.backgroundColor = .red
+        addGameToFavoriteButton.setTitle("Add to Favorite", for: .normal)
+        addGameToFavoriteButton.addTarget(self, action: #selector(addGameToFavoriteButtonDidTapped), for: .touchUpInside)
+    }
+    
     func setupStackView() {
         stackView.axis = .vertical
         stackView.spacing = 20
@@ -60,6 +69,7 @@ class GameDetailViewController: UIViewController {
         stackView.addArrangedSubview(gameReleaseDateLabel)
         stackView.addArrangedSubview(gameRankTitleLabel)
         stackView.addArrangedSubview(gameRankLabel)
+        stackView.addArrangedSubview(addGameToFavoriteButton)
         
         setStackViewConstraints()
     }
@@ -91,4 +101,8 @@ class GameDetailViewController: UIViewController {
     }
     
     //MARK: - ACTIONS
+    @objc func addGameToFavoriteButtonDidTapped() {
+        print("add this game to favorite")
+        navigationController?.popViewController(animated: true)
+    }
 }
