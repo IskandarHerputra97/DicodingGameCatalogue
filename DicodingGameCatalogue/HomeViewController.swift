@@ -100,6 +100,9 @@ class HomeViewController: UIViewController {
         let url = URL(string: urlString)
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            if let error = error {
+                print("error message: \(error.localizedDescription)")
+            }
             guard let data = data else {return}
             
             do {
