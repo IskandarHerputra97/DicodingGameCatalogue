@@ -12,8 +12,6 @@ class HomeViewController: UIViewController {
     //MARK: - PROPERTIES
     var gameCount = 0
     var games = [Game]()
-    var searchKey: String?
-    var tempListLength = 0
     
     let activityIndicator = UIActivityIndicatorView()
     let searchBar = UISearchBar()
