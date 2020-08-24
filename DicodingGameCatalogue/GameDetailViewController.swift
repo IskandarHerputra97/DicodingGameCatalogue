@@ -8,8 +8,12 @@
 
 import UIKit
 
-class GameDetailViewController: UIViewController {
+enum GameDetailViewControllerFlowType: Int {
+    case normalFlow
+    case favoriteFlow
+}
 
+class GameDetailViewController: UIViewController {
     //MARK: - PROPERTIES
     var gameImageView = UIImageView()
     var gameReleaseDateTitleLabel = UILabel()
@@ -17,8 +21,20 @@ class GameDetailViewController: UIViewController {
     var gameRankTitleLabel = UILabel()
     var gameRankLabel = UILabel()
     var addGameToFavoriteButton = UIButton()
+    var removeGameFromFavoriteButton = UIButton()
     let stackView = UIStackView()
     let scrollView = UIScrollView()
+    
+    let flowType: GameDetailViewControllerFlowType
+    
+    required init(flowType: GameDetailViewControllerFlowType) {
+        self.flowType = flowType
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +46,18 @@ class GameDetailViewController: UIViewController {
         setupGameReleaseDateTitleLabel()
         setupGameRankTitleLabel()
         setupAddGameToFavoriteButton()
+        setupRemoveGameFromFavoriteButton()
         setupScrollView()
         setupStackView()
+        
+        if self.flowType == .normalFlow {
+            removeGameFromFavoriteButton.isHidden = true
+            addGameToFavoriteButton.isHidden = false
+        }
+        else if flowType == .favoriteFlow {
+            removeGameFromFavoriteButton.isHidden = false
+            addGameToFavoriteButton.isHidden = true
+        }
     }
     
     //MARK: - SETUP UI
@@ -58,6 +84,13 @@ class GameDetailViewController: UIViewController {
         addGameToFavoriteButton.addTarget(self, action: #selector(addGameToFavoriteButtonDidTapped), for: .touchUpInside)
     }
     
+    func setupRemoveGameFromFavoriteButton() {
+        removeGameFromFavoriteButton.setTitleColor(.white, for: .normal)
+        removeGameFromFavoriteButton.backgroundColor = .blue
+        removeGameFromFavoriteButton.setTitle("Remove from Favorite", for: .normal)
+        removeGameFromFavoriteButton.addTarget(self, action: #selector(removeGameFromFavoriteButtonDidTapped), for: .touchUpInside)
+    }
+    
     func setupStackView() {
         stackView.axis = .vertical
         stackView.spacing = 20
@@ -70,6 +103,7 @@ class GameDetailViewController: UIViewController {
         stackView.addArrangedSubview(gameRankTitleLabel)
         stackView.addArrangedSubview(gameRankLabel)
         stackView.addArrangedSubview(addGameToFavoriteButton)
+        stackView.addArrangedSubview(removeGameFromFavoriteButton)
         
         setStackViewConstraints()
     }
@@ -103,6 +137,11 @@ class GameDetailViewController: UIViewController {
     //MARK: - ACTIONS
     @objc func addGameToFavoriteButtonDidTapped() {
         print("add this game to favorite")
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func removeGameFromFavoriteButtonDidTapped() {
+        print("remove this game from favorite")
         navigationController?.popViewController(animated: true)
     }
 }
