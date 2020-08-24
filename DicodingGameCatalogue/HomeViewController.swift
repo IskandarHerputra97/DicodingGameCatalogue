@@ -95,14 +95,6 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(aboutViewController, animated: true)
     }
     
-    func showTableView() {
-        gameTableView.isHidden = false
-    }
-    
-    func hideTableView() {
-        gameTableView.isHidden = true
-    }
-    
     func getGameData(completion: @escaping () -> Void) {
         let urlString = "https://api.rawg.io/api/games"
         let url = URL(string: urlString)
