@@ -6,12 +6,14 @@
 //  Copyright © 2020 Iskandar Herputra Wahidiyat. All rights reserved.
 //
 
+import RealmSwift
 import UIKit
 
 class FavoriteGamesViewController: UIViewController {
     //MARK: - PROPERTIES
+    let realm = try! Realm()
     var gameCount = 0
-    var games = [Game]()
+    var games = [FavoriteGame]()
     
     let activityIndicator = UIActivityIndicatorView()
     let gameTableView = UITableView()
@@ -22,13 +24,10 @@ class FavoriteGamesViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
         title = "Favorite Games"
         view.backgroundColor = .white
-        /*
-        activityIndicator.startAnimating()
-        getGameData {
-            self.gameTableView.reloadData()
-            self.activityIndicator.stopAnimating()
-        }
-        */
+      
+        let fetchLocalData = realm.objects(FavoriteGame.self)
+        games.append(contentsOf: fetchLocalData)
+        gameCount = fetchLocalData.count
 
         setupGameTableView()
         setupStackView()
@@ -77,30 +76,6 @@ class FavoriteGamesViewController: UIViewController {
     }
     
     //MARK: - ACTIONS
-    func getGameData(completion: @escaping () -> Void) {
-        let urlString = "https://api.rawg.io/api/games"
-        let url = URL(string: urlString)
-        
-        URLSession.shared.dataTask(with: url!) { (data, response, error) in
-            if let error = error {
-                print("error message: \(error.localizedDescription)")
-            }
-            guard let data = data else {return}
-            
-            do {
-                let decoder = JSONDecoder()
-                let result = try decoder.decode(Game.self, from: data)
-                self.games.append(result)
-                self.gameCount = result.results.count
-                DispatchQueue.main.async {
-                    completion()
-                }
-            }
-            catch {
-                print(error)
-            }
-        }.resume()
-    }
 }
 
 extension FavoriteGamesViewController: UITableViewDataSource, UITableViewDelegate {
@@ -112,32 +87,32 @@ extension FavoriteGamesViewController: UITableViewDataSource, UITableViewDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: "GameCell") as! GameTableViewCell
         
         guard games.count > 0 else {return cell}
-        let url = URL(string: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
+        let url = URL(string: games[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
         guard let data = try? Data(contentsOf: url!) else {return cell}
         let image = UIImage(data: data)
         
         cell.gameImageView.image = image
-        guard let gameName = games[0].results[indexPath.row].name else {return cell}
+        guard let gameName = games[indexPath.row].name else {return cell}
         cell.gameTitleLabel.text = gameName
-        guard let gameRank = games[0].results[indexPath.row].rating_top else {return cell}
+        guard let gameRank = games[indexPath.row].rating_top else {return cell}
         cell.gameRankLabel.text = "# \(gameRank)"
-        guard let gameReleaseDate = games[0].results[indexPath.row].released else {return cell}
+        guard let gameReleaseDate = games[indexPath.row].released else {return cell}
         cell.gameReleaseDateLabel.text = gameReleaseDate
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let gameDetailViewController = GameDetailViewController(flowType: .favoriteFlow, imageUrlString: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
+        let gameDetailViewController = GameDetailViewController(flowType: .favoriteFlow, imageUrlString: games[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
         
-        let url = URL(string: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
+        let url = URL(string: games[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
         guard let data = try? Data(contentsOf: url!) else {return}
         let image = UIImage(data: data)
         
-        gameDetailViewController.title = games[0].results[indexPath.row].name
+        gameDetailViewController.title = games[indexPath.row].name
         gameDetailViewController.gameImageView.image = image
-        gameDetailViewController.gameReleaseDateLabel.text = games[0].results[indexPath.row].released
-        guard let gameRank = games[0].results[indexPath.row].rating_top else {return}
+        gameDetailViewController.gameReleaseDateLabel.text = games[indexPath.row].released
+        guard let gameRank = games[indexPath.row].rating_top else {return}
         gameDetailViewController.gameRankLabel.text = "\(gameRank)"
         
         navigationController?.pushViewController(gameDetailViewController, animated: true)
