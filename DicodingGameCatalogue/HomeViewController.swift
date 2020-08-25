@@ -34,7 +34,7 @@ class HomeViewController: UIViewController {
         */
         
         let fetchLocalData = realm.objects(FavoriteGame.self)
-        print(fetchLocalData[0].rating_top)
+        //print(fetchLocalData[0].rating_top)
         
         activityIndicator.startAnimating()
         getGameData {
@@ -217,7 +217,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let gameDetailViewController = GameDetailViewController(flowType: .normalFlow, imageUrlString: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
+        let gameDetailViewController = GameDetailViewController(flowType: .normalFlow, imageUrlString: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png", cellPosition: indexPath.row)
         
         let url = URL(string: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
         guard let data = try? Data(contentsOf: url!) else {return}

@@ -29,10 +29,12 @@ class GameDetailViewController: UIViewController {
     
     let flowType: GameDetailViewControllerFlowType
     var imageUrlString: String
+    let cellPosition: Int
     
-    required init(flowType: GameDetailViewControllerFlowType, imageUrlString: String) {
+    required init(flowType: GameDetailViewControllerFlowType, imageUrlString: String, cellPosition: Int) {
         self.flowType = flowType
         self.imageUrlString = imageUrlString
+        self.cellPosition = cellPosition
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -156,6 +158,13 @@ class GameDetailViewController: UIViewController {
     
     @objc func removeGameFromFavoriteButtonDidTapped() {
         print("remove this game from favorite")
-        navigationController?.popViewController(animated: true)
+        
+        var favoriteGame = FavoriteGame()
+        let result = realm.objects(FavoriteGame.self)
+        try! realm.write {
+            realm.delete(result[self.cellPosition])
+        }
+        
+        navigationController?.popToRootViewController(animated: true)
     }
 }
