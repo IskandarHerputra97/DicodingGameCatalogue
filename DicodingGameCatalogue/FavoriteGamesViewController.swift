@@ -22,12 +22,13 @@ class FavoriteGamesViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
         title = "Favorite Games"
         view.backgroundColor = .white
-        
+        /*
         activityIndicator.startAnimating()
         getGameData {
             self.gameTableView.reloadData()
             self.activityIndicator.stopAnimating()
         }
+        */
 
         setupGameTableView()
         setupStackView()
@@ -127,7 +128,7 @@ extension FavoriteGamesViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let gameDetailViewController = GameDetailViewController(flowType: .favoriteFlow)
+        let gameDetailViewController = GameDetailViewController(flowType: .favoriteFlow, imageUrlString: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
         
         let url = URL(string: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
         guard let data = try? Data(contentsOf: url!) else {return}

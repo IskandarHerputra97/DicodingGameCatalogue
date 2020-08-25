@@ -26,9 +26,11 @@ class GameDetailViewController: UIViewController {
     let scrollView = UIScrollView()
     
     let flowType: GameDetailViewControllerFlowType
+    var imageUrlString: String
     
-    required init(flowType: GameDetailViewControllerFlowType) {
+    required init(flowType: GameDetailViewControllerFlowType, imageUrlString: String) {
         self.flowType = flowType
+        self.imageUrlString = imageUrlString
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -137,6 +139,7 @@ class GameDetailViewController: UIViewController {
     //MARK: - ACTIONS
     @objc func addGameToFavoriteButtonDidTapped() {
         print("add this game to favorite")
+        var favoriteGame = FavoriteGame()
         navigationController?.popViewController(animated: true)
     }
     
