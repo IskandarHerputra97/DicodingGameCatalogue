@@ -15,7 +15,6 @@
 		607DCBF624B175A4004ACE52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607DCBF524B175A4004ACE52 /* AppDelegate.swift */; };
 		607DCBFA24B175A4004ACE52 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607DCBF924B175A4004ACE52 /* HomeViewController.swift */; };
 		607DCBFF24B175AA004ACE52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607DCBFE24B175AA004ACE52 /* Assets.xcassets */; };
-		607DCC0224B175AA004ACE52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607DCC0024B175AA004ACE52 /* LaunchScreen.storyboard */; };
 		607DCC0A24B17D97004ACE52 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607DCC0924B17D97004ACE52 /* GameTableViewCell.swift */; };
 		607DCC1224B1AA7C004ACE52 /* GameDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607DCC1124B1AA7C004ACE52 /* GameDetailViewController.swift */; };
 		607DCC1424B1B9D9004ACE52 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607DCC1324B1B9D9004ACE52 /* AboutViewController.swift */; };
@@ -31,7 +30,6 @@
 		607DCBF524B175A4004ACE52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607DCBF924B175A4004ACE52 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		607DCBFE24B175AA004ACE52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		607DCC0124B175AA004ACE52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		607DCC0324B175AA004ACE52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607DCC0924B17D97004ACE52 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
 		607DCC1124B1AA7C004ACE52 /* GameDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 				607DCC1124B1AA7C004ACE52 /* GameDetailViewController.swift */,
 				607DCC1324B1B9D9004ACE52 /* AboutViewController.swift */,
 				607DCBFE24B175AA004ACE52 /* Assets.xcassets */,
-				607DCC0024B175AA004ACE52 /* LaunchScreen.storyboard */,
 				607DCC0324B175AA004ACE52 /* Info.plist */,
 				603904D824F40C9800CB2E4D /* FavoriteGamesViewController.swift */,
 			);
@@ -182,7 +179,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607DCC0224B175AA004ACE52 /* LaunchScreen.storyboard in Resources */,
 				607DCBFF24B175AA004ACE52 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,17 +245,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		607DCC0024B175AA004ACE52 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				607DCC0124B175AA004ACE52 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		607DCC0424B175AA004ACE52 /* Debug */ = {

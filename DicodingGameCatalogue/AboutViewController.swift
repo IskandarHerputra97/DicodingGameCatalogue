@@ -9,55 +9,42 @@
 import UIKit
 
 class AboutViewController: UIViewController {
-
     //MARK: - PROPERTIES
     let aboutImageView = UIImageView()
     let nameLabel = UILabel()
     let stackView = UIStackView()
     let scrollView = UIScrollView()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         navigationItem.largeTitleDisplayMode = .never
         title = "About Page"
         view.backgroundColor = .black
-        
         setupAboutImageView()
         setupNameLabel()
         setupScrollView()
         setupStackView()
     }
-    
     //MARK: - SETUP UI
     func setupAboutImageView() {
         aboutImageView.image = UIImage(named: "profile-photo")
     }
-    
     func setupNameLabel() {
         nameLabel.text = "Iskandar Herputra Wahidiyat"
         nameLabel.textColor = .white
     }
-    
     func setupStackView() {
         stackView.axis = .vertical
         stackView.spacing = 20
         stackView.alignment = .center
-        
         stackView.addArrangedSubview(aboutImageView)
         stackView.addArrangedSubview(nameLabel)
-        
         setStackViewConstraints()
     }
-    
     func setupScrollView() {
         view.addSubview(scrollView)
-        
         scrollView.addSubview(stackView)
-        
         setScrollViewConstraints()
     }
-    
     //MARK: - SET CONSTRAINTS
     func setScrollViewConstraints() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -66,7 +53,6 @@ class AboutViewController: UIViewController {
         scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
-    
     func setStackViewConstraints() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
@@ -75,6 +61,4 @@ class AboutViewController: UIViewController {
         stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
     }
-    
-    //MARK: - ACTIONS
 }
