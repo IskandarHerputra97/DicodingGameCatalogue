@@ -6,6 +6,7 @@
 //  Copyright © 2020 Iskandar Herputra Wahidiyat. All rights reserved.
 //
 
+import RealmSwift
 import UIKit
 
 enum GameDetailViewControllerFlowType: Int {
@@ -15,6 +16,7 @@ enum GameDetailViewControllerFlowType: Int {
 
 class GameDetailViewController: UIViewController {
     //MARK: - PROPERTIES
+    let realm = try! Realm()
     var gameImageView = UIImageView()
     var gameReleaseDateTitleLabel = UILabel()
     var gameReleaseDateLabel = UILabel()
@@ -139,7 +141,16 @@ class GameDetailViewController: UIViewController {
     //MARK: - ACTIONS
     @objc func addGameToFavoriteButtonDidTapped() {
         print("add this game to favorite")
+        
         var favoriteGame = FavoriteGame()
+        favoriteGame.name = title
+        favoriteGame.background_image = self.imageUrlString
+        favoriteGame.released = gameReleaseDateLabel.text
+        favoriteGame.rating_top = gameRankLabel.text
+        try! realm.write {
+            realm.add(favoriteGame)
+        }
+        
         navigationController?.popViewController(animated: true)
     }
     
