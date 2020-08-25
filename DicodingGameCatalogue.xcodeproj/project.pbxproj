@@ -11,6 +11,7 @@
 		6039046124EA606B00CB2E4D /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6039046024EA606B00CB2E4D /* Results.swift */; };
 		6039046324EA613600CB2E4D /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6039046224EA613600CB2E4D /* Game.swift */; };
 		603904D924F40C9800CB2E4D /* FavoriteGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603904D824F40C9800CB2E4D /* FavoriteGamesViewController.swift */; };
+		603904DB24F53A8200CB2E4D /* FavoriteGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603904DA24F53A8200CB2E4D /* FavoriteGame.swift */; };
 		607DCBF624B175A4004ACE52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607DCBF524B175A4004ACE52 /* AppDelegate.swift */; };
 		607DCBFA24B175A4004ACE52 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607DCBF924B175A4004ACE52 /* HomeViewController.swift */; };
 		607DCBFF24B175AA004ACE52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607DCBFE24B175AA004ACE52 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 		6039046024EA606B00CB2E4D /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 		6039046224EA613600CB2E4D /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		603904D824F40C9800CB2E4D /* FavoriteGamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGamesViewController.swift; sourceTree = "<group>"; };
+		603904DA24F53A8200CB2E4D /* FavoriteGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGame.swift; sourceTree = "<group>"; };
 		607DCBF224B175A4004ACE52 /* DicodingGameCatalogue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DicodingGameCatalogue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607DCBF524B175A4004ACE52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607DCBF924B175A4004ACE52 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			children = (
 				6039046024EA606B00CB2E4D /* Results.swift */,
 				6039046224EA613600CB2E4D /* Game.swift */,
+				603904DA24F53A8200CB2E4D /* FavoriteGame.swift */,
 			);
 			path = Games;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			files = (
 				603904D924F40C9800CB2E4D /* FavoriteGamesViewController.swift in Sources */,
 				607DCC1424B1B9D9004ACE52 /* AboutViewController.swift in Sources */,
+				603904DB24F53A8200CB2E4D /* FavoriteGame.swift in Sources */,
 				6039046324EA613600CB2E4D /* Game.swift in Sources */,
 				607DCBFA24B175A4004ACE52 /* HomeViewController.swift in Sources */,
 				607DCC1224B1AA7C004ACE52 /* GameDetailViewController.swift in Sources */,

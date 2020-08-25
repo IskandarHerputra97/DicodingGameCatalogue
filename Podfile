@@ -7,5 +7,6 @@ target 'DicodingGameCatalogue' do
 
   # Pods for DicodingGameCatalogue
   pod 'Alamofire', '~> 4.8.1'
+  pod 'RealmSwift'
 
 end

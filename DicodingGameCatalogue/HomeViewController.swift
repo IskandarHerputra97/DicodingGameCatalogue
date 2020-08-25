@@ -6,6 +6,7 @@
 //  Copyright © 2020 Iskandar Herputra Wahidiyat. All rights reserved.
 //
 
+import RealmSwift
 import UIKit
 
 class HomeViewController: UIViewController {
@@ -20,6 +21,21 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let realm = try! Realm()
+        print(Realm.Configuration.defaultConfiguration.fileURL)
+        
+        /*
+        var favoriteGame = FavoriteGame()
+        favoriteGame.name = "game abc"
+        try! realm.write {
+            realm.add(favoriteGame)
+        }
+        */
+        
+        let fetchLocalData = realm.objects(FavoriteGame.self)
+        print(fetchLocalData[0].rating_top)
+        
         activityIndicator.startAnimating()
         getGameData {
             self.gameTableView.reloadData()
