@@ -157,8 +157,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         cell.gameImageView.image = image
         guard let gameName = games[0].results[indexPath.row].name else {return cell}
         cell.gameTitleLabel.text = gameName
-        guard let gameRank = games[0].results[indexPath.row].rating_top else {return cell}
-        cell.gameRankLabel.text = "# \(gameRank)"
+        guard let gameRank = games[0].results[indexPath.row].rating else {return cell}
+        cell.gameRankLabel.text = "\(gameRank)"
         guard let gameReleaseDate = games[0].results[indexPath.row].released else {return cell}
         cell.gameReleaseDateLabel.text = gameReleaseDate
         return cell
@@ -171,7 +171,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         gameDetailViewController.title = games[0].results[indexPath.row].name
         gameDetailViewController.gameImageView.image = image
         gameDetailViewController.gameReleaseDateLabel.text = games[0].results[indexPath.row].released
-        guard let gameRank = games[0].results[indexPath.row].rating_top else {return}
+        guard let gameRank = games[0].results[indexPath.row].rating else {return}
         gameDetailViewController.gameRankLabel.text = "\(gameRank)"
         navigationController?.pushViewController(gameDetailViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)

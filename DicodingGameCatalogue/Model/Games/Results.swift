@@ -13,4 +13,5 @@ struct Results: Codable {
     let released: String?
     let background_image: String?
     let rating_top: Int?
+    let rating: Double?
 }
