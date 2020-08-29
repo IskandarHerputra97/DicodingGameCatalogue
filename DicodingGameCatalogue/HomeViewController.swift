@@ -17,9 +17,28 @@ class HomeViewController: UIViewController {
     let searchBar = UISearchBar()
     let gameTableView = UITableView()
     let stackView = UIStackView()
+    let realm = try! Realm()
+    
+    var alreadyFavoritedGamesName = [String]()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let fetchLocalData = realm.objects(FavoriteGame.self)
+        print("fetchLocalData: \(fetchLocalData)")
+        print("fetchLocalData.count: \(fetchLocalData.count)")
+        
+        alreadyFavoritedGamesName.removeAll()
+        
+        for i in fetchLocalData {
+            print(i)
+            alreadyFavoritedGamesName.append(i.name ?? "")
+        }
+        
+        print("alreadyFavoritedGames: \(alreadyFavoritedGamesName)")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let realm = try! Realm()
+        
         activityIndicator.startAnimating()
         getGameData {
             self.gameTableView.reloadData()
@@ -164,7 +183,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let gameDetailViewController = GameDetailViewController(flowType: .normalFlow, imageUrlString: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png", cellPosition: indexPath.row)
+        let gameDetailViewController = GameDetailViewController(flowType: .normalFlow, imageUrlString: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png", cellPosition: indexPath.row, alreadyFavoritedGamesName: self.alreadyFavoritedGamesName)
         let url = URL(string: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
         guard let data = try? Data(contentsOf: url!) else {return}
         let image = UIImage(data: data)

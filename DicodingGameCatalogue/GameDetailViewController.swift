@@ -28,10 +28,14 @@ class GameDetailViewController: UIViewController {
     let flowType: GameDetailViewControllerFlowType
     var imageUrlString: String
     let cellPosition: Int
-    required init(flowType: GameDetailViewControllerFlowType, imageUrlString: String, cellPosition: Int) {
+    
+    var alreadyFavoritedGamesName = [String]()
+    
+    required init(flowType: GameDetailViewControllerFlowType, imageUrlString: String, cellPosition: Int, alreadyFavoritedGamesName: [String]) {
         self.flowType = flowType
         self.imageUrlString = imageUrlString
         self.cellPosition = cellPosition
+        self.alreadyFavoritedGamesName = alreadyFavoritedGamesName
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -49,8 +53,26 @@ class GameDetailViewController: UIViewController {
         setupScrollView()
         setupStackView()
         if self.flowType == .normalFlow {
-            removeGameFromFavoriteButton.isHidden = true
-            addGameToFavoriteButton.isHidden = false
+            if alreadyFavoritedGamesName.isEmpty {
+                removeGameFromFavoriteButton.isHidden = true
+                addGameToFavoriteButton.isHidden = false
+            }
+            else {
+                for i in alreadyFavoritedGamesName {
+                    print(i)
+                    if i == self.title {
+                        print("\(i) game favorited")
+                        removeGameFromFavoriteButton.isHidden = false
+                        addGameToFavoriteButton.isHidden = true
+                        break
+                    }
+                    else {
+                        print("\(i) not favorited")
+                        removeGameFromFavoriteButton.isHidden = true
+                        addGameToFavoriteButton.isHidden = false
+                    }
+                }
+            }
         }
         else if flowType == .favoriteFlow {
             removeGameFromFavoriteButton.isHidden = false
@@ -132,9 +154,19 @@ class GameDetailViewController: UIViewController {
     }
     @objc func removeGameFromFavoriteButtonDidTapped() {
         var favoriteGame = FavoriteGame()
+        var counter = 0
         let result = realm.objects(FavoriteGame.self)
-        try! realm.write {
-            realm.delete(result[self.cellPosition])
+        for i in result {
+            if let nameFromResult = i.name, let gameTitle = self.title {
+                print("nameFromResult: \(nameFromResult)")
+                print("gameTitle: \(gameTitle)")
+                if nameFromResult == gameTitle {
+                    try! realm.write {
+                        realm.delete(result[counter])
+                    }
+                }
+            }
+            counter += 1
         }
         navigationController?.popToRootViewController(animated: true)
     }

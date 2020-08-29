@@ -81,7 +81,7 @@ extension FavoriteGamesViewController: UITableViewDataSource, UITableViewDelegat
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let gameDetailViewController = GameDetailViewController(flowType: .favoriteFlow, imageUrlString: games[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png", cellPosition: indexPath.row)
+        let gameDetailViewController = GameDetailViewController(flowType: .favoriteFlow, imageUrlString: games[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png", cellPosition: indexPath.row, alreadyFavoritedGamesName: [])
         let url = URL(string: games[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
         guard let data = try? Data(contentsOf: url!) else {return}
         let image = UIImage(data: data)
