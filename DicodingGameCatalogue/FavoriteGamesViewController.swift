@@ -75,7 +75,7 @@ extension FavoriteGamesViewController: UITableViewDataSource, UITableViewDelegat
         guard let gameName = games[indexPath.row].name else {return cell}
         cell.gameTitleLabel.text = gameName
         guard let gameRank = games[indexPath.row].rating_top else {return cell}
-        cell.gameRankLabel.text = "# \(gameRank)"
+        cell.gameRankLabel.text = "\(gameRank)"
         guard let gameReleaseDate = games[indexPath.row].released else {return cell}
         cell.gameReleaseDateLabel.text = gameReleaseDate
         return cell
