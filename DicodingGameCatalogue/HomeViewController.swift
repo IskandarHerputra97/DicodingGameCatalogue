@@ -39,7 +39,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(Realm.Configuration.defaultConfiguration.fileURL)
         activityIndicator.startAnimating()
         getGameData {
             self.gameTableView.reloadData()

@@ -14,4 +14,8 @@ class FavoriteGame: Object {
     @objc dynamic var released: String?
     @objc dynamic var background_image: String?
     @objc dynamic var rating_top: String?
+    @objc dynamic var rating: String?
+    @objc dynamic var metacritic: String?
+    @objc dynamic var playtime: String?
+    @objc dynamic var suggestions_count: String?
 }

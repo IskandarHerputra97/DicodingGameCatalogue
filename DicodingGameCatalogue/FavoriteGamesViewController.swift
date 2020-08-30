@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import SDWebImage
 import UIKit
 
 class FavoriteGamesViewController: UIViewController {
@@ -69,12 +70,14 @@ extension FavoriteGamesViewController: UITableViewDataSource, UITableViewDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: "GameCell") as! GameTableViewCell
         guard games.count > 0 else {return cell}
         let url = URL(string: games[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
-        guard let data = try? Data(contentsOf: url!) else {return cell}
-        let image = UIImage(data: data)
-        cell.gameImageView.image = image
+        //guard let data = try? Data(contentsOf: url!) else {return cell}
+        //let image = UIImage(data: data)
+        //cell.gameImageView.image = image
+        cell.gameImageView.sd_setImage(with: url!, completed: nil)
+        
         guard let gameName = games[indexPath.row].name else {return cell}
         cell.gameTitleLabel.text = gameName
-        guard let gameRank = games[indexPath.row].rating_top else {return cell}
+        guard let gameRank = games[indexPath.row].rating else {return cell}
         cell.gameRankLabel.text = "\(gameRank)"
         guard let gameReleaseDate = games[indexPath.row].released else {return cell}
         cell.gameReleaseDateLabel.text = gameReleaseDate
@@ -83,13 +86,19 @@ extension FavoriteGamesViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let gameDetailViewController = GameDetailViewController(flowType: .favoriteFlow, imageUrlString: games[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png", cellPosition: indexPath.row, alreadyFavoritedGamesName: [])
         let url = URL(string: games[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
-        guard let data = try? Data(contentsOf: url!) else {return}
-        let image = UIImage(data: data)
+        //guard let data = try? Data(contentsOf: url!) else {return}
+        //let image = UIImage(data: data)
+        //gameDetailViewController.gameImageView.image = image
+        gameDetailViewController.gameImageView.sd_setImage(with: url!, completed: nil)
+        
         gameDetailViewController.title = games[indexPath.row].name
-        gameDetailViewController.gameImageView.image = image
         gameDetailViewController.gameReleaseDateLabel.text = games[indexPath.row].released
-        guard let gameRank = games[indexPath.row].rating_top else {return}
+        guard let gameRank = games[indexPath.row].rating else {return}
         gameDetailViewController.gameRankLabel.text = "\(gameRank)"
+        guard let metacritic = games[indexPath.row].metacritic, let playtime = games[indexPath.row].playtime, let suggestionsCount = games[indexPath.row].suggestions_count else {return}
+        gameDetailViewController.metacriticLabel.text = "\(metacritic)"
+        gameDetailViewController.playtimeLabel.text = "\(playtime)"
+        gameDetailViewController.suggestionsCountLabel.text = "\(suggestionsCount)"
         navigationController?.pushViewController(gameDetailViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

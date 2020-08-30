@@ -177,7 +177,10 @@ class GameDetailViewController: UIViewController {
         favoriteGame.name = title
         favoriteGame.background_image = self.imageUrlString
         favoriteGame.released = gameReleaseDateLabel.text
-        favoriteGame.rating_top = gameRankLabel.text
+        favoriteGame.rating = gameRankLabel.text
+        favoriteGame.metacritic = metacriticLabel.text
+        favoriteGame.playtime = playtimeLabel.text
+        favoriteGame.suggestions_count = suggestionsCountLabel.text
         try! realm.write {
             realm.add(favoriteGame)
         }
