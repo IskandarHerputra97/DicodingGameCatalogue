@@ -12,8 +12,6 @@ import UIKit
 
 class HomeViewController: UIViewController {
     //MARK: - PROPERTIES
-    //var gameCount = 0
-    //var games = [Game]()
     let activityIndicator = UIActivityIndicatorView()
     let searchBar = UISearchBar()
     let gameTableView = UITableView()
@@ -39,17 +37,15 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(Realm.Configuration.defaultConfiguration.fileURL)
         activityIndicator.startAnimating()
-//        getGameData {
-//            self.gameTableView.reloadData()
-//            self.activityIndicator.stopAnimating()
-//        }
+
         APIService.getGameData {
             self.gameTableView.reloadData()
             self.activityIndicator.stopAnimating()
         }
+        
         navigationController?.navigationBar.prefersLargeTitles = true
+        
         title = "Game Catalogue"
         view.backgroundColor = .white
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Favorite", style: .plain, target: self, action: #selector(favoriteBarButtonItemTapped))
@@ -106,53 +102,10 @@ class HomeViewController: UIViewController {
         let aboutViewController = AboutViewController()
         navigationController?.pushViewController(aboutViewController, animated: true)
     }
-//    func getGameData(completion: @escaping () -> Void) {
-//        let urlString = "https://api.rawg.io/api/games"
-//        let url = URL(string: urlString)
-//        URLSession.shared.dataTask(with: url!) { (data, response, error) in
-//            if let error = error {
-//                print("error message: \(error.localizedDescription)")
-//            }
-//            guard let data = data else {return}
-//            do {
-//                let decoder = JSONDecoder()
-//                let result = try decoder.decode(Game.self, from: data)
-//                self.games.append(result)
-//                self.gameCount = result.results.count
-//                DispatchQueue.main.async {
-//                    completion()
-//                }
-//            }
-//            catch {
-//                print(error)
-//            }
-//        }.resume()
-//    }
-//    func searchGameData(searchKey: String, completion: @escaping () -> Void) {
-//        let urlString = "https://api.rawg.io/api/games?search=\(searchKey)"
-//        let url = URL(string: urlString)
-//        URLSession.shared.dataTask(with: url!) { (data, response, error) in
-//            guard let data = data else {return}
-//                do {
-//                    self.games.removeAll()
-//                    let decoder = JSONDecoder()
-//                    let result = try decoder.decode(Game.self, from: data)
-//                    self.games.append(result)
-//                    self.gameCount = result.results.count
-//                    DispatchQueue.main.async {
-//                        completion()
-//                    }
-//                }
-//                catch {
-//                    print(error)
-//                }
-//        }.resume()
-//    }
 }
 extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        //games.removeAll()
         APIService.games.removeAll()
         guard let searchKey = searchBar.text else {return}
         let formattedSearchKey = searchKey.replacingOccurrences(of: " ", with: "-")
@@ -160,10 +113,6 @@ extension HomeViewController: UISearchBarDelegate {
             self.gameTableView.reloadData()
             self.activityIndicator.startAnimating()
         }
-//        searchGameData(searchKey: formattedSearchKey) {
-//            self.gameTableView.reloadData()
-//            self.activityIndicator.stopAnimating()
-//        }
         APIService.searchGameData(searchKey: formattedSearchKey) {
             self.gameTableView.reloadData()
             self.activityIndicator.stopAnimating()
@@ -175,13 +124,11 @@ extension HomeViewController: UISearchBarDelegate {
 }
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return gameCount
         return APIService.gameCount
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GameCell") as! GameTableViewCell
         guard APIService.games.count > 0 else {return cell}
-//        let url = URL(string: games[0].results[indexPath.row].backgroundImage ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
         let url = URL(string: APIService.games[0].results[indexPath.row].backgroundImage ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
         cell.gameImageView.sd_setImage(with: url!, completed: nil)
         
@@ -206,6 +153,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         gameDetailViewController.suggestionsCountLabel.text = "\(suggestionsCount)"
         guard let gameRank = APIService.games[0].results[indexPath.row].rating else {return}
         gameDetailViewController.gameRankLabel.text = "\(gameRank)"
+        
         navigationController?.pushViewController(gameDetailViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

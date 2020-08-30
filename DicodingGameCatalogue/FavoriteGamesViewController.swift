@@ -70,9 +70,6 @@ extension FavoriteGamesViewController: UITableViewDataSource, UITableViewDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: "GameCell") as! GameTableViewCell
         guard games.count > 0 else {return cell}
         let url = URL(string: games[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
-        //guard let data = try? Data(contentsOf: url!) else {return cell}
-        //let image = UIImage(data: data)
-        //cell.gameImageView.image = image
         cell.gameImageView.sd_setImage(with: url!, completed: nil)
         
         guard let gameName = games[indexPath.row].name else {return cell}
@@ -86,9 +83,6 @@ extension FavoriteGamesViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let gameDetailViewController = GameDetailViewController(flowType: .favoriteFlow, imageUrlString: games[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png", cellPosition: indexPath.row, alreadyFavoritedGamesName: [])
         let url = URL(string: games[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
-        //guard let data = try? Data(contentsOf: url!) else {return}
-        //let image = UIImage(data: data)
-        //gameDetailViewController.gameImageView.image = image
         gameDetailViewController.gameImageView.sd_setImage(with: url!, completed: nil)
         
         gameDetailViewController.title = games[indexPath.row].name

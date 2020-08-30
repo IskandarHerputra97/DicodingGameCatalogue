@@ -173,7 +173,7 @@ class GameDetailViewController: UIViewController {
     }
     //MARK: - ACTIONS
     @objc func addGameToFavoriteButtonDidTapped() {
-        var favoriteGame = FavoriteGame()
+        let favoriteGame = FavoriteGame()
         favoriteGame.name = title
         favoriteGame.background_image = self.imageUrlString
         favoriteGame.released = gameReleaseDateLabel.text
@@ -187,7 +187,6 @@ class GameDetailViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @objc func removeGameFromFavoriteButtonDidTapped() {
-        var favoriteGame = FavoriteGame()
         var counter = 0
         let result = realm.objects(FavoriteGame.self)
         for i in result {
