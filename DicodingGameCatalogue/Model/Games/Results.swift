@@ -11,7 +11,15 @@ import Foundation
 struct Results: Codable {
     let name: String?
     let released: String?
-    let background_image: String?
-    let rating_top: Int?
+    let backgroundImage: String?
+    let ratingTop: Int?
     let rating: Double?
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case released
+        case backgroundImage = "background_image"
+        case ratingTop = "rating_top"
+        case rating
+    }
 }

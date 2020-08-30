@@ -171,7 +171,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GameCell") as! GameTableViewCell
         guard games.count > 0 else {return cell}
-        let url = URL(string: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
+        let url = URL(string: games[0].results[indexPath.row].backgroundImage ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
         cell.gameImageView.sd_setImage(with: url!, completed: nil)
         
         guard let gameName = games[0].results[indexPath.row].name else {return cell}
@@ -183,8 +183,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let gameDetailViewController = GameDetailViewController(flowType: .normalFlow, imageUrlString: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png", cellPosition: indexPath.row, alreadyFavoritedGamesName: self.alreadyFavoritedGamesName)
-        let url = URL(string: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
+        let gameDetailViewController = GameDetailViewController(flowType: .normalFlow, imageUrlString: games[0].results[indexPath.row].backgroundImage ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png", cellPosition: indexPath.row, alreadyFavoritedGamesName: self.alreadyFavoritedGamesName)
+        let url = URL(string: games[0].results[indexPath.row].backgroundImage ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
         gameDetailViewController.gameImageView.sd_setImage(with: url!, completed: nil)
         
         gameDetailViewController.title = games[0].results[indexPath.row].name
