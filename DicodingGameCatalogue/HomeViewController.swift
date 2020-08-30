@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import SDWebImage
 import UIKit
 
 class HomeViewController: UIViewController {
@@ -171,9 +172,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GameCell") as! GameTableViewCell
         guard games.count > 0 else {return cell}
         let url = URL(string: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
-        guard let data = try? Data(contentsOf: url!) else {return cell}
-        let image = UIImage(data: data)
-        cell.gameImageView.image = image
+        cell.gameImageView.sd_setImage(with: url!, completed: nil)
+        
         guard let gameName = games[0].results[indexPath.row].name else {return cell}
         cell.gameTitleLabel.text = gameName
         guard let gameRank = games[0].results[indexPath.row].rating else {return cell}
@@ -185,10 +185,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let gameDetailViewController = GameDetailViewController(flowType: .normalFlow, imageUrlString: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png", cellPosition: indexPath.row, alreadyFavoritedGamesName: self.alreadyFavoritedGamesName)
         let url = URL(string: games[0].results[indexPath.row].background_image ?? "https://img.pngio.com/game-icon-png-image-free-download-searchpngcom-game-icon-png-715_715.png")
-        guard let data = try? Data(contentsOf: url!) else {return}
-        let image = UIImage(data: data)
+        gameDetailViewController.gameImageView.sd_setImage(with: url!, completed: nil)
+        
         gameDetailViewController.title = games[0].results[indexPath.row].name
-        gameDetailViewController.gameImageView.image = image
         gameDetailViewController.gameReleaseDateLabel.text = games[0].results[indexPath.row].released
         guard let gameRank = games[0].results[indexPath.row].rating else {return}
         gameDetailViewController.gameRankLabel.text = "\(gameRank)"
