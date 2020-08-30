@@ -14,6 +14,9 @@ struct Results: Codable {
     let backgroundImage: String?
     let ratingTop: Int?
     let rating: Double?
+    let metacritic: Int?
+    let playtime: Int?
+    let suggestionsCount: Int?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -21,5 +24,8 @@ struct Results: Codable {
         case backgroundImage = "background_image"
         case ratingTop = "rating_top"
         case rating
+        case metacritic
+        case playtime
+        case suggestionsCount = "suggestions_count"
     }
 }

@@ -21,6 +21,12 @@ class GameDetailViewController: UIViewController {
     var gameReleaseDateLabel = UILabel()
     var gameRankTitleLabel = UILabel()
     var gameRankLabel = UILabel()
+    var metacriticTitleLabel = UILabel()
+    var metacriticLabel = UILabel()
+    var playtimeTitleLabel = UILabel()
+    var playtimeLabel = UILabel()
+    var suggestionsCountTitleLabel = UILabel()
+    var suggestionsCountLabel = UILabel()
     var addGameToFavoriteButton = UIButton()
     var removeGameFromFavoriteButton = UIButton()
     let stackView = UIStackView()
@@ -48,6 +54,9 @@ class GameDetailViewController: UIViewController {
         setupGameImageView()
         setupGameReleaseDateTitleLabel()
         setupGameRankTitleLabel()
+        setupMetacriticTitleLabel()
+        setupPlaytimeTitleLabel()
+        setupSuggestionsCountTitleLabel()
         setupAddGameToFavoriteButton()
         setupRemoveGameFromFavoriteButton()
         setupScrollView()
@@ -93,6 +102,22 @@ class GameDetailViewController: UIViewController {
         gameRankTitleLabel.text = "GAME RANK"
         gameRankTitleLabel.font = UIFont.boldSystemFont(ofSize: 24)
     }
+    
+    func setupMetacriticTitleLabel() {
+        metacriticTitleLabel.text = "METACRITIC"
+        metacriticTitleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+    }
+    
+    func setupPlaytimeTitleLabel() {
+        playtimeTitleLabel.text = "PLAY TIME"
+        playtimeTitleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+    }
+    
+    func setupSuggestionsCountTitleLabel() {
+        suggestionsCountTitleLabel.text = "SUGGESTIONS COUNT"
+        suggestionsCountTitleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+    }
+    
     func setupAddGameToFavoriteButton() {
         addGameToFavoriteButton.setTitleColor(.white, for: .normal)
         addGameToFavoriteButton.backgroundColor = .red
@@ -115,6 +140,12 @@ class GameDetailViewController: UIViewController {
         stackView.addArrangedSubview(gameReleaseDateLabel)
         stackView.addArrangedSubview(gameRankTitleLabel)
         stackView.addArrangedSubview(gameRankLabel)
+        stackView.addArrangedSubview(metacriticTitleLabel)
+        stackView.addArrangedSubview(metacriticLabel)
+        stackView.addArrangedSubview(playtimeTitleLabel)
+        stackView.addArrangedSubview(playtimeLabel)
+        stackView.addArrangedSubview(suggestionsCountTitleLabel)
+        stackView.addArrangedSubview(suggestionsCountLabel)
         stackView.addArrangedSubview(addGameToFavoriteButton)
         stackView.addArrangedSubview(removeGameFromFavoriteButton)
         setStackViewConstraints()

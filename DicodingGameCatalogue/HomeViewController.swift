@@ -189,6 +189,10 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         
         gameDetailViewController.title = games[0].results[indexPath.row].name
         gameDetailViewController.gameReleaseDateLabel.text = games[0].results[indexPath.row].released
+        guard let metacritic = games[0].results[indexPath.row].metacritic, let playtime = games[0].results[indexPath.row].playtime, let suggestionsCount = games[0].results[indexPath.row].suggestionsCount else {return}
+        gameDetailViewController.metacriticLabel.text = "\(metacritic)"
+        gameDetailViewController.playtimeLabel.text = "\(playtime)"
+        gameDetailViewController.suggestionsCountLabel.text = "\(suggestionsCount)"
         guard let gameRank = games[0].results[indexPath.row].rating else {return}
         gameDetailViewController.gameRankLabel.text = "\(gameRank)"
         navigationController?.pushViewController(gameDetailViewController, animated: true)
